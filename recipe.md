@@ -19,6 +19,7 @@ I want to keep a todo list along with my diary
 As a user
 So that I can keep track of my contacts
 I want to see a list of all of the mobile phone numbers in all my diary entries
+# mobile numbers : start with a 0 and be 11 digits
 
 2. Design the Class System
 
@@ -47,66 +48,134 @@ read_past_experiences
 select_diary_entries
 mark_complete
 
-┌────────────────────────────┐
-│ MusicPlayer                │
-│                            │
-│ - tracks                   │
-│ - add(track)               │
-│ - search_by_title(keyword) │
-│   => [tracks...]           │
-└───────────┬────────────────┘
-            │
-            │ owns a list of
-            ▼
-┌─────────────────────────┐
-│ Track(title, artist)    │
-│                         │
-│ - title                 │
-│ - artist                │
-│ - format()              │
-│   => "TITLE by ARTIST"  │
-└─────────────────────────┘
+Diary --> DiaryEntry 
+TaskList --> Task
+PhoneNumberExtractor
+ReadableEntryFinder
+
 Also design the interface of each class in more detail.
 
-class MusicLibrary:
+
+
+class Diary:
     # User-facing properties:
     #   tracks: list of instances of Track
 
     def __init__(self):
         pass # No code here yet
 
-    def add(self, track):
+    def add(self, entry):
         # Parameters:
-        #   track: an instance of Track
+        #   entry: an instance of entry
         # Side-effects:
-        #   Adds the track to the tracks property of the self object
+        #   Adds the entry to the entry property of the self object
         pass # No code here yet
 
-    def search_by_title(self, keyword):
-        # Parameters:
-        #   keyword: string
+    def all(self):
         # Returns:
-        #   A list of the Track objects that have titles that include the keyword
+        #   A list of the entries objects
         pass # No code here yet
 
 
-class Track:
+class DiaryEntry:
     # User-facing properties:
     #   title: string
-    #   artist: string
+    #   contents: string
 
-    def __init__(self, title, artist):
+    def __init__(self, title, contents):
         # Parameters:
         #   title: string
-        #   artist: string
-        # Side-effects:
-        #   Sets the title and artist properties
+        #   contents: string
+        
         pass # No code here yet
 
     def format(self):
         # Returns:
-        #   A string of the form "TITLE by ARTIST"
+        #   A string of the form "TITLE : Contents"
+        pass 
+
+class TaskList:
+    # User-facing properties:
+    #   title: string
+    #   contents: string
+
+    def __init__(self):        
         pass # No code here yet
+
+    def add(self, todo):
+        # Parameters:
+        #   task: an instance of task
+        # Returns:
+        #    Nothing
+        # Side-effects:
+        # Adds the task to the task list
+        pass 
+    def incomplete(self):
+        # Returns:
+        #   A list of task instances representing the todos that are not complete
+        pass
+    def complete(self):
+        # Returns:
+        #   A list of task instances representing the todos that are complete
+        pass
+
+class Task:
+    # User-facing properties:
+    #   title: string
+    #   contents: string
+
+    def __init__(self, task):
+        # Parameters:
+        #   title: string
+        #   contents: string
+        
+        pass # No code here yet
+
+    def mark_complete(self):
+        # Returns:
+        #   Sets the tasks complete to True
+        pass 
+
+import re
+class PhoneNumberExtractor:
+    # User-facing properties:
+    #   phone number: string
+    
+
+    def __init__(self):
+        pass # No code here yet
+
+    def extract_numbers(self, diary_entry):
+        # Returns:
+        #   numbers = re.findall(r'[0-9]+', diary_entry)
+        #   self.numbers += numbers
+            pass 
+    def list_numbers(self):
+        # Returns:
+        #  list of phone numbers
+
+class ReadableEntryFinder:
+    def __init__(self):
+        pass
+    
+    def estimate_reading_time(self, text):
+        # words = text.split()
+        # word_count = len(words)
+        # returns
+        # word_count / time
+
+    
+
+
+
+
+
+
+
+
+
+
+
 3. Create Examples as Integration Tests
 
 Create examples of the classes being used together in different situations and combinations that reflect the ways in which the system will be used.
